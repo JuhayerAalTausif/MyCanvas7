@@ -42,6 +42,11 @@ function Circle(x, y, velocity, radius) {
             x: this.x,
             y: this.y
         }
+
+        this.lastmouse = {
+            x: x,
+            y: y
+        };
         this.radiun += this.velocity;
         this.lastmouse.x += (mouse.x - this.lastmouse.x) ;
         this.lastmouse.y += (mouse.y - this.lastmouse.y) ;
