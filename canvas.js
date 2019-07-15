@@ -15,10 +15,18 @@ var mouse = {
     x: undefined,
     y: undefined
 }
-window.addEventListener('mousemove', function(event) {
+window.addEventListener("touchstart", move);
+window.addEventListener("mousemove", move1);
+function move1(event){
     mouse.x = event.x;
     mouse.y = event.y;
-});
+}
+function move(event) {
+    window.addEventListener("touchmove", function(event){
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+    });
+}
 var colorArr = [
     '#024469',
     '#29F2F2',
@@ -48,8 +56,8 @@ function Circle(x, y, velocity, radius) {
             y: y
         };
         this.radiun += this.velocity;
-        this.lastmouse.x += (mouse.x - this.lastmouse.x) ;
-        this.lastmouse.y += (mouse.y - this.lastmouse.y) ;
+        this.lastmouse.x += (mouse.x - this.lastmouse.x);
+        this.lastmouse.y += (mouse.y - this.lastmouse.y);
         this.x = this.lastmouse.x + Math.cos(this.radiun) * this.distFrmCenter;
         this.y = this.lastmouse.y + Math.sin(this.radiun) * this.distFrmCenter;
 
@@ -75,7 +83,7 @@ for (var i = 0; i < randomRange; i++) {
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    window.requestAnimationFrame(animate);
     c.fillStyle = 'rgba(255, 255, 255, 0.05)';
     c.fillRect(0, 0, innerWidth, innerHeight);
 
